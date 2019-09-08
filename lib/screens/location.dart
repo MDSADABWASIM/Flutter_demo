@@ -16,6 +16,7 @@ class _LocationState extends State<Location> {
   Set<Marker> markers = Set();
   MarkerId selectedMarker;
 
+///Call to add a new marker in the map
   void _add(LatLng point) async {
     final int markerCount = markers.length;
 
@@ -50,9 +51,10 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
+    //Consuming userLocation provider.
     var userLocation = Provider.of<UserLocation>(context);
-    _center = LatLng(
-        userLocation?.latitude ?? 23.3441, userLocation?.longitude ?? 85.3096);
+    //setting up initial latitude and longitude.
+    _center = LatLng(userLocation?.latitude ?? 23.3441, userLocation?.longitude ?? 85.3096);
     _buildTaskList(context);
     return Scaffold(
       appBar: AppBar(
@@ -76,6 +78,7 @@ class _LocationState extends State<Location> {
     );
   }
 
+///Consumes the AppDatabase provider and builds all the markers.
   _buildTaskList(BuildContext context) {
     final database = Provider.of<AppDatabase>(context);
     database.watchAllTask().listen((snapshot) {
@@ -87,6 +90,7 @@ class _LocationState extends State<Location> {
     });
   }
 
+///Builds a marker with local database stored data and add it to the markers set.
   _buildMarker(Task itemTask, AppDatabase database) {
     final Marker marker = Marker(
       markerId: MarkerId(itemTask.markerId),
