@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 //Homepage used for navigation between pages, and consuming provider.
 class HomePage extends StatelessWidget {
+  //List of  screens.
   final List<Widget> _children = [
     HowToUse(),
     Location(),
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Consuming bottomNavigationBarProvider to change pages.
     var provider = Provider.of<BottomNavigationBarProvider>(context);
 
     return Scaffold(
@@ -68,6 +70,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
+//Our changeNotifier class to change pages through bottomNavBar
 class BottomNavigationBarProvider with ChangeNotifier {
   int _currentIndex = 0;
 
